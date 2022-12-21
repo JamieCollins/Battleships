@@ -30,8 +30,9 @@ ocean_grid = [["O", "O", "O", "O", "O"],
 
 def play_game():
     """
-    
+    The main code that runs the game.
     """
+    ship_counter = 3
     ship_1 = ship_point_randomiser()
     ship_2 = ship_point_randomiser()
     ship_3 = ship_point_randomiser()
@@ -48,19 +49,26 @@ def play_game():
     checks if numbers hit a ships location,
     updates grid display showing 'hits' and 'misses'.
     """
-    row = int(input("Choose a number between 1 and 5: "))
-    col = int(input("Choose a number between 1 and 5: "))
+    while ship_counter > 0:
+        row = int(input("Choose a number between 1 and 5: "))
+        col = int(input("Choose a number between 1 and 5: "))
 
-    if (row - 1, col - 1) == ship_1 or (row - 1, col - 1) == ship_2 or (row - 1, col - 1) == ship_3:
-        print("Success, you hit a ship!")
-        ocean_grid[row - 1][col - 1] = "X"
-        grid_print()
-    else:
-        print("You missed, try again!")
-        ocean_grid[row - 1][col - 1] = "."
-        grid_print()
+
+        if (row - 1, col - 1) == ship_1 or (row - 1, col - 1) == ship_2 or (row - 1, col - 1) == ship_3:
+            print("Success, you hit a ship!")
+            ocean_grid[row - 1][col - 1] = "X"
+            ship_counter = ship_counter - 1
+            grid_print()
+        else:
+            print("You missed, try again!")
+            ocean_grid[row - 1][col - 1] = "."
+            grid_print()
+
 
 def grid_print():
+    """
+    Prints the grid for the game when called.
+    """
     for i in ocean_grid:
         print(*i)
     
