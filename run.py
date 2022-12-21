@@ -33,6 +33,7 @@ def play_game():
     The main code that runs the game.
     """
     ship_counter = 3
+    shots_taken = 0
     ship_1 = ship_point_randomiser()
     ship_2 = ship_point_randomiser()
     ship_3 = ship_point_randomiser()
@@ -58,11 +59,16 @@ def play_game():
             print("Success, you hit a ship!")
             ocean_grid[row - 1][col - 1] = "X"
             ship_counter = ship_counter - 1
+            shots_taken = shots_taken + 1
             grid_print()
         else:
             print("You missed, try again!")
             ocean_grid[row - 1][col - 1] = "."
+            shots_taken = shots_taken + 1
             grid_print()
+
+    if ship_counter == 0:
+        print(f"Congratulations you shunk all the ships. You took {shots_taken} shots to win!")
 
 
 def grid_print():
