@@ -14,6 +14,13 @@ they will be given feedback and prompted to try again.
 -The game continues until all 3 ships are completely hit.
 """
 
+
+import random
+
+
+"""
+Creates the "ocean" from a 2D grid of 5x5 rows and colummns.
+"""
 ocean_grid = [["O", "O", "O", "O", "O"],
             ["O", "O", "O", "O", "O"],
             ["O", "O", "O", "O", "O"],
@@ -21,13 +28,10 @@ ocean_grid = [["O", "O", "O", "O", "O"],
             ["O", "O", "O", "O", "O"]]
 
 
-import random
-
 def play_game():
     """
-    Creates the "ocean" from a 2D grid of 5x5 rows and colummns.
+    
     """
-
     ship_1 = ship_point_randomiser()
     ship_2 = ship_point_randomiser()
     ship_3 = ship_point_randomiser()
@@ -38,17 +42,22 @@ def play_game():
 
     grid_print()
 
-    #Asks user to pick two numbers, checks if numbers hit a ships location.
 
-    row = int(input("Choose a number between 0 and 4: "))
-    col = int(input("Choose a number between 0 and 4: "))
-    if (row, col) == ship_1 or (row, col) == ship_2 or (row, col) == ship_3:
-        print("Success")
-        ocean_grid[row][col] = "X"
+    """
+    Asks user to pick two numbers, 
+    checks if numbers hit a ships location,
+    updates grid display showing 'hits' and 'misses'.
+    """
+    row = int(input("Choose a number between 1 and 5: "))
+    col = int(input("Choose a number between 1 and 5: "))
+
+    if (row - 1, col - 1) == ship_1 or (row - 1, col - 1) == ship_2 or (row - 1, col - 1) == ship_3:
+        print("Success, you hit a ship!")
+        ocean_grid[row - 1][col - 1] = "X"
         grid_print()
     else:
-        print("Missed")
-        ocean_grid[row][col] = "."
+        print("You missed, try again!")
+        ocean_grid[row - 1][col - 1] = "."
         grid_print()
 
 def grid_print():
@@ -58,7 +67,7 @@ def grid_print():
 
 def ship_point_randomiser():
     """
-    Creates points for ships to be placed.
+    Assigns random rows and columns to ships within grid range
     """
     return random.randint(0, 4), random.randint(0, 4)
 
