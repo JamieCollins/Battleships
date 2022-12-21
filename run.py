@@ -38,6 +38,12 @@ def create_grid():
     print(ship_2)
     print(ship_3)
 
+    row = int(input("Choose a number between 0 and 4: "))
+    col = int(input("Choose a number between 0 and 4: "))
+    if (row, col) == ship_1 or (row, col) == ship_2 or (row, col) == ship_3:
+        print("Success")
+    else:
+        print("Missed")
 
 def ship_point_randomiser():
     """
